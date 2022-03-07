@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block titleName %}Satsang Seva{% endblock %}</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img\icons\Master\svg\ico\apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img\icons\Master\ico\favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img\icons\Master\ico\favicon-16x16.png' %}">
+  <script></script>
+  <link rel="stylesheet" href="{% static 'main.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'gp.css' %}" type="text/css" />
+  <style>
+  </style>
+</head>
+{% spaceless %}
+<body>
+  <header>
+    {% include 'navBar.html' %}
+  </header>
+  <div class="main" id="allContainer" style="height: min(94.5vh, 1940px);">
+    <div class="gp-animate-zoom gp-container gp-align-left gp-panel gp-card gp-white gp-text-black gp-hide">This is a notification!
+    </div>
+    {% block content %}<div class="gp-display-middle gp-card gp-padding-64">You are not Loged in. Please Login First.
+    </div>{% endblock content %}
+  </div>
+  {% include 'session_security/all.html' %}
+  {% block footer %}
+  <!-- Footer -->
+  <footer class="gp-center gp-black gp-padding-64 gp-opacity gp-hover-opacity-off" id="id01">
+    <a href="#hm" class="gp-button gp-light-grey"><i class="fa fa-arrow-up gp-margin-right"></i>To the top</a>
+    <div class="gp-xlarge gp-section">
+      <i class="fa fa-facebook-official gp-hover-opacity"></i>
+      <i class="fa fa-instagram gp-hover-opacity"></i>
+      <i class="fa fa-snapchat gp-hover-opacity"></i>
+      <i class="fa fa-pinterest-p gp-hover-opacity"></i>
+      <i class="fa fa-twitter gp-hover-opacity"></i>
+      <i class="fa fa-linkedin gp-hover-opacity"></i>
+    </div>
+    <p>CSS Library used from <a href="" title="gp" target="_blank" class="gp-hover-text-green">bootstrap & gp-Css</a>
+    </p>
+  </footer>
+  {% endblock footer %}
+  <script type="text/javascript" src="{% static 'main.js' %}"> var auth = "{{user.is_authenticated}}"; </script>
+<script>
+  '{% if user.is_authenticated %}'
+  sessionSecurity.activity();
+  window.addEventListener("load", function () { window.scrollTo(0, 0); });
+  function bigbar_open() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("allContainer").style.marginLeft = "200px";
+    '{% if request.get_full_path == "/sponsor/sponsorform/" %}'
+    document.getElementById("sponsorModal").style.marginLeft = "200px";
+    '{% endif %}'
+    document.getElementById("myBigSidebar").style.display = "block";
+  }
+  function bigbar_close() {
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("allContainer").style.marginLeft = "0%";
+    '{% if request.get_full_path == "/sponsor/sponsorform/" %}'
+    document.getElementById("sponsorModal").style.marginLeft = "0%";
+    '{% endif %}'
+    document.getElementById("myBigSidebar").style.display = "none";
+  }
+  var mySidebar = document.getElementById("ssSB");
+  function bar_open() {
+    if (mySidebar.style.display === 'block') {
+      mySidebar.style.display = 'none';
+    } else {
+      mySidebar.style.display = 'block';
+    }
+  }
+  function bar_close() {
+    mySidebar.style.display = "none";
+  }
+  var width = window.innerWidth
+  || document.documentElement.clientWidth
+  || document.body.clientWidth;
+  var height = window.innerHeight
+  || document.documentElement.clientHeight
+  || document.body.clientHeight;
+  '{% if request.get_full_path == "/sponsor/dashboard/" or request.get_full_path == "/sponsor/display/" %}'
+  var locCity, LocState;
+  locCity = '{{ userCity }}';
+  locState = '{{ userState }}';
+  $('#barTitle').text('SPONSOR');
+  '{% endif %}'
+  '{% if request.get_full_path == "/ims/imsdata/" or request.get_full_path == "/ims/imsform/" %}'
+  $('#barTitle').text('IMS APP');
+  '{% endif %}'
+  '{% if request.get_full_path != "/accounts/logout/" and request.get_full_path != "/accounts/login/" and request.get_full_path != "/sponsor/display/" %}'
+  document.addEventListener('DOMContentLoaded', function () {
+    let dashboardref = document.querySelector('.dashboarduserinfo');
+    let ul1 = document.querySelector('#userList');
+    let mnContainer = document.querySelector('#allContainer');
+    var loc = window.location;
+    var pname = loc.pathname;
+    var uLio1, uLio;
+    var wsStart = 'ws://';
+    if (loc.protocol == 'https:') {
+      wsStart = 'wss://';
+    }
+    const alertSocket = new ReconnectingWebSocket(
+      wsStart
+      + loc.host
+      + loc.pathname
+    );
+    alertSocket.onmessage = function (e) {
+      var setTm;
+      var msgIn = JSON.parse(e.data);
+      if (msgIn.Desc === 'User Log In/Out.') {
+
+        if ('{{ user.first_name }}' !== msgIn.username) {
+          var el = document.createElement("li");
+          $('#id_' + msgIn.username).remove();
+          var nodeLi, nodeSpan;
+          $(ul1).prepend(msgIn.uStatusList);
+          $(mnContainer).append(msgIn.uStatus);
+        }
+      } else if (msgIn.Desc === 'Sponsor Added/Updated') {
+        $('#spTotal').text(msgIn.spTotal);
+        $('#spTodayTotal').text(msgIn.spTodayTotal);
+        $('#dbSpTableBody').prepend(msgIn.spListHTML);
+        $(mnContainer).append(msgIn.spStatusHTML);
+      }
+      setTimeout(function () {
+        if ($('#appStatus').length > 0) {
+          $('#appStatus').remove();
+        }
+      }, 3000);
+    }
+  });
+  '{% endif %}'
+  '{{ request.get_full_path }}'
+  '{% if request.get_full_path == "/sponsor/sponsordata/" or request.get_full_path == "/sponsor/sponsorform/"  or request.get_full_path == "/sponsor/sharedSponsorform/" or request.get_full_path == "ims/imsform/" %}'
+  $("#id_ZipCode").change(function () {
+    var url = "{{ request.path }}";
+    var zipcodeId = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        zipcode: zipcodeId,
+      },
+      success: function (data) {
+        if (data.is_taken) {
+          alert("Location not available.");
+        } else {
+          $.each(data, function (key, value) {
+            $("#" + key).val(value);
+            var el = document.getElementById(key);
+            if (value == 'NA') {
+              el.readOnly = false;
+            } else {
+              el.readOnly = true;
+            }
+          });
+        }
+      }
+    });
+  });
+  $("#id_Purpose").change(function () {
+    var url = "{{ request.path }}";
+    var purposeId = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        purpose: purposeId,
+      },
+      success: function (data) {
+        if (data.is_taken) {
+          alert("Location not available.");
+        } else {
+          $.each(data, function (key, value) {
+            $.each(value, function (k, v) {
+              if (k === 'fields') {
+                console.log();
+                $("#id_Purpose_Code").val(v['Purpose_Code']);
+                $("#id_PurposeIndex").val(v['Purpose_Index']);
+                $("#id_Memo").val(v['AnnounceAs']);
+              }
+            });
+          });
+        }
+      },
+    });
+  });
+  $(function () {
+    var id;
+    var lstValue = [];
+    function getListValue(val) {
+      var vl, vlInd;
+      vl = val;
+      id = id;
+      if ((val.indexOf(",")) !== -1) {
+        vlInd = (val).lastIndexOf(",") + 1;
+      } else if ((val.indexOf(" ")) !== -1) {
+        vlInd = (val).lastIndexOf(" ") + 1;
+      } else if ((val.indexOf("&")) !== -1) {
+        vlInd = (val).lastIndexOf("&") + 1;
+      } else {
+        vlInd = 0;
+      };
+      vl = (val).substr(vlInd);
+      vl = vl.trim();
+      $.ajax({
+        url: "{{ request.path }}",
+        type: "POST",
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          lst: id + '-' + vl,
+        },
+        success: function (data) {
+          var result = [];
+          data = JSON.parse(data);
+          len = data.length;
+          for (i = 0; i < len; i++) {
+            result.push({
+              label: data[i],
+              value: data[i]
+            });
+            lstValue[i] = data[i];
+          }
+          return lstValue;
+        },
+      });
+    };
+    function split(val) {
+      return val.split(/,\s*/);
+    }
+    function extractLast(term) {
+      return split(term).pop();
+    }
+    $("input.spFormInput")
+      .on("keydown", function (event) {
+        id = this.id;
+        if (event.keyCode === $.ui.keyCode.TAB &&
+          $(this).autocomplete("instance").menu.active) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+          getListValue(request.term);
+          response($.ui.autocomplete.filter(
+            lstValue, extractLast(request.term)));
+        },
+        focus: function () {
+          return false;
+        },
+        select: function (event, ui) {
+          var terms = split(this.value);
+          terms.pop();
+          terms.push(ui.item.value);
+          terms.push("");
+          this.value = terms.join(", ");
+          return false;
+        }
+      });
+  });
+  '{% endif %}'
+  const getUA = () => {
+    let device = "Unknown";
+    const ua = {
+      "Generic Linux": /Linux/i,
+      "Android": /Android/i,
+      "BlackBerry": /BlackBerry/i,
+      "Bluebird": /EF500/i,
+      "Chrome OS": /CrOS/i,
+      "Datalogic": /DL-AXIS/i,
+      "Honeywell": /CT50/i,
+      "iPad": /iPad/i,
+      "iPhone": /iPhone/i,
+      "iPod": /iPod/i,
+      "macOS": /Macintosh/i,
+      "Windows": /IEMobile|Windows/i,
+      "Zebra": /TC70|TC55/i,
+    }
+    Object.keys(ua).map(v => navigator.userAgent.match(ua[v]) && (device = v));
+    return device;
+  }
+  '{% endif %}'
+  '{% block script %}'
+  '{% endblock script %}'
+</script>
+
+</body>
+{% endspaceless %}
+</html>

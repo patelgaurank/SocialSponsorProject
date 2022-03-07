@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titleName %}Sponsor Slide{% endblock %}
+{% block content %}
+<div class="gp-container gp-center shImgzzz" id="pptSlidesContainer" style="height: min(94.5vh, 1940px);">
+  <div class="gp-display-container gp-card-4" style="width:100%;height:inherit;">
+    <div class="gp-display-middle" id="cngDpTitle">
+    </div>
+    <img class="gp-hide-small" src="{% static 'img\PPTBG.jpg' %}" alt='Background for Slide' control id="pptDisplay" style="width:100%;height:inherit;margin: 0 0 -10px 0;padding: 0 0 -10px 0;">
+    <div  class="gp-hide-large gp-hide-medium gp-display-middle">
+      <img src="{% static 'img\icons\Master\svg\smartphone-rotate.svg' %}" style="width:40%;height:30%;">
+      <h4>Rotate the screen to start announcer slide.</h4>
+    </div>
+    <div class="gp-display-bottommiddle gp-mobile gp-padding-64" id="sldSettingOption" style="z-index: 1;">
+      {% autoescape off %}{{ spObj }}{% endautoescape %}
+    </div>
+    <div class="gp-display-middle gp-mobile" id="cngDpTable">
+    </div>
+    <div class="gp-display-bottomright">
+      <a class="glyphicon glyphicon-fullscreen gp-button gp-transparent" onclick="openFullscreen('pptSlidesContainer', 'pptDisplay');SlideShow('display')" id="flBtn"></a>
+    </div>
+    <div class="gp-display-right gp-margin-right gp-large gp-button gp-transparent" id="sldNxtButton">
+      <a class="material-icons" onclick="changeSlide(1)" style="font-size:30px;">keyboard_arrow_right</a>
+    </div>
+    <div class="gp-display-left gp-margin-left gp-large gp-button gp-transparent" id="sldPrvButton">
+      <a class="material-icons" onclick="changeSlide(-1)" style="font-size:30px;">keyboard_arrow_left</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+<script>
+'{% block script %}'
+  var noOfSlides = '{{ NoOfSlides }}';
+  var fullScreen = false;
+  var sldNumToOpen = 0;
+  var sldSettingOption = document.getElementById('sldSettingOption');
+  var getDataFor = 'display';
+  // Auto Slide show
+  var slideIndex = 0;
+  var setTm;
+  if ( noOfSlides < 1 ) {
+      $('#cngDpTable').html('<h1 class="gp-display-middle" id="0sponsortitle">0 sponsor record found.</h1>');
+   }
+
+  function AutoSlideShow() {
+    changeSlide(1);
+    setTm = setTimeout(AutoSlideShow, 5000); // Change image every 2 seconds
+  }
+
+  function SlideShow(dataFor) {
+    getDataFor = dataFor;
+    changeSlide(1);
+  }
+
+  function changeData(dataFor) {
+    getDataFor = dataFor;
+  }
+  // open full screen
+  function openFullscreen(elmId, pptId) {
+    fullScreen=true;
+    var elem = document.getElementById(elmId);
+    var pptElem = document.getElementById(pptId);
+    sldSettingOption.style.display = 'none';
+    pptElem.style.width="100%";
+    pptElem.style.height="100%";
+    elem.style.paddingTop="0.5vh";
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+    if (typeof window.ActiveXObject !== "undefined") {
+      var wscript = new ActiveXObject("WScript.Shell");
+      if (wscript !== null) {
+        wscript.SendKeys("{F11}");
+      }
+    }
+    closeFullscreen();
+  }
+
+  // close full screen
+  function closeFullscreen() {
+    fullScreen=false;
+    var sldSettingOption = document.getElementById('sldSettingOption');
+    sldSettingOption.style.display = 'block';
+    if (fullScreen==true) {location.reload(true);fullScreen=false;}
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+
+  // screen changed
+  document.addEventListener('fullscreenchange', exitHandler);
+  document.addEventListener('webkitfullscreenchange', exitHandler);
+  document.addEventListener('mozfullscreenchange', exitHandler);
+  document.addEventListener('MSFullscreenChange', exitHandler);
+
+  window.addEventListener("orientationchange", function() {
+    if (window.orientation == 90 || window.orientation == -90) {
+      openFullscreen('pptSlidesContainer', 'pptDisplay');SlideShow('announce');
+    } else {
+      openFullscreen('pptSlidesContainer', 'pptDisplay');SlideShow();
+    }
+  });
+
+  function exitHandler() {
+      if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+          window.location.reload(false);
+          clearTimeout(setTm);
+      }
+  }
+
+  // Key press event
+  document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+        closeFullscreen();
+    }
+    if (evt.keyCode == 39) {
+      changeSlide(1);
+    }
+    if (evt.keyCode == 37) {
+      changeSlide(-1);
+    }
+  }
+
+  //Get contact detail
+  function smLookup(id) {
+      removeChildElementsByCN('mySpTbl')
+      var board = $('#sponsor-list').attr('data-board-id');
+      var tbl = document.createElement("table");
+      document.getElementById("tblGrp").appendChild(tbl);
+      tbl.className += "mySpTbl gp-table-all gp-transparent gp-strip gp-bordered gp-center gp-text-red gp-xxlarge";
+      tbl.id = "mySpTbl";
+
+      $.ajax({
+          type: "POST",
+          url: $('#sponsor-list').attr('data-done-ref'),
+          data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            id: id,
+          },
+          success: function(data) {
+              var obj =data;
+            },
+            error: function(xhr, textStatus, errorThrown) {
+            alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+            }
+        });
+    }
+
+
+  // On click go to next slide
+  function changeSlide(sldNum) {
+        sldSettingOption.style.display = 'none';
+        var url = "{% url 'Display_Slide' %}";
+        if ( noOfSlides < 1 ) {
+          $('#cngDpTable').html('<h1>0 sponsor record found.</h1>');
+          return false;
+        }
+        sldNumToOpen = sldNumToOpen + sldNum;
+        if (sldNumToOpen > noOfSlides) {
+          sldNumToOpen = 1;
+          } else {
+            if (Number(sldNumToOpen) < 1) {
+            sldNumToOpen = noOfSlides;
+            }
+          }
+        $.ajax({
+          type: "POST",
+          dataType: 'json',
+          url: url,
+          data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            sldNumToOpen: getDataFor+'-'+sldNumToOpen,
+          },
+          success: function (data) {
+            if (data.is_taken) {
+              alert("Location not available.");
+            } else {
+              var obj =data;
+              $.each( obj, function( key, value ) {
+                if (key==='nos') {
+                  noOfSlides = value;
+                } else if (key==='tblMarginTop') {
+                  if ($(window).width()<1025) {
+                    if (value===199) {
+                      $('#cngDpTable').css('margin-top', 55);
+                    } else {
+                      $('#cngDpTable').css('margin-top', 55);
+                    }
+                  } else {
+                    $('#cngDpTable').css('margin-top', value);
+                  }
+                } else {
+                  $('#'+key).html(value);
+                }
+              });
+            }
+          }
+        });
+  }
+'{% endblock script %}'
+</script>

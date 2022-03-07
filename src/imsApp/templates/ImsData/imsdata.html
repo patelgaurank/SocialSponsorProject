@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block titleName %}Satsangi{% endblock %}
+
+{% block content %}
+<!-- Team Container -->
+<div class="gp-container" id="team">
+  <div class="gp-row hdScb" id="imsRow">
+      <div class="gp-bar">
+        <input class="gp-bar-item gp-input gp-right gp-transparent gp-text-white gp-border-0 gp-border-bottom sils" type="text" placeholder="Search Data.." id="searchInput" onkeyup="mySearchFunction('imsTable')">
+      </div>
+      <div class="gp-display-container gp-hide-small" id="imsContainerLarge">
+        <div class="gp-responsive gp-round hdScb" id="imsTableResponsive">
+          <table class="gp-table-all gp-hoverable gp-card-4" id="imsTable">
+            <img class="gp-display-middle" src="{% static 'img\icons\Master\svg\loading.svg' %}" id="Loading" alt="Loading" style="width:40px">
+          </table>
+        </div>
+      </div>
+      <div class="gp-display-container gp-hide-large gp-hide-medium" id="imsContainerSmall">
+        <div class="gp-responsive gp-round hdScb" id="imsTableResponsive">
+        <table class="gp-table gp-striped gp-bordered gp-border gp-hoverable gp-white" id="imsTable">
+          <img class="gp-display-middle" src="{% static 'img\icons\Master\svg\loading.svg' %}" id="Loading" alt="Loading" style="width:30px">
+        </table>
+        </div>
+      </div>
+    </div>
+    {% include "imsData/imsForm.html" %}
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+
+<script>
+'{% block script %}'
+
+var srchResult;
+// Add data table
+var lstIms = ['imsContainerSmall', 'imsContainerLarge'];
+lstIms.forEach(remvoeElements);
+function remvoeElements(item) {
+  var elm = $('#'+item);
+  if ( elm.css("display") === 'none' ) {
+    elm.remove();
+  } else if ( elm.css("display") !== 'none' ) {
+    $.ajax({
+    url: "{% url 'IMS_data' %}",
+    type: 'POST',
+    data: {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      itemData: item,
+      },
+      success: function (data) {
+      if (data.is_taken) {
+        alert("Data not available.");
+      } else {
+        var obj =data;
+        $('#imsTable').append(obj);
+        $('#Loading').remove();
+      }
+    },
+    error: function(xhr,errmsg,err) {
+      console.log(xhr.status + ":" + xhr.responseText);
+    }
+  });
+  };
+}
+
+// Search all columns from sponsor table
+function mySearchFunction(tblName) {
+  var input, filter, table, tr, td, i, idTag;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById(tblName);
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    if (i>0) {
+      txtValue = tr[i].textContent || tr[i].innerText
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+// Sorting table
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("imsTable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("td")[n];
+      y = rows[i + 1].getElementsByTagName("td")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+// Search Filter
+function myFilterFunction(n) {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("td")[n];
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+// On form Updated
+$("#frmUpdate").click(function() {
+  document.location.hash="";
+  document.getElementById('frmButton').click();
+  closeModal('imsDataModalForm');
+  //document.getElementById("searchInput").innerText = srchResult;
+  //console.log(srchResult);
+})
+// On form close
+$("#frmClose").click(function() {
+  document.location.hash="";
+  closeModal('imsDataModalForm');
+  //document.getElementById("searchInput").innerText =srchResult;
+  //console.log(srchResult);
+})
+// var allcnt = document.getElementById('#allContainer');
+// #allContainer {
+//       margin-top: 6vh;
+//       height: 93.5vh;
+//       }
+var imsModel = document.getElementById('imsDataModalForm');
+// Open up modal
+function openModal(mdlStr) {
+  document.getElementById(mdlStr).style.display="block";
+  console.log(document.getElementById('allContainer').style.marginTop);
+}
+// close up modal
+function closeModal(mdlStr) {
+  document.getElementById(mdlStr).style.display="none";
+}
+
+// $('#imsTable').find('tbody').find('tr').click(function(){
+//   // alert('clicked');
+// });
+
+// On tr Clicked
+$("#imsTable").on('click','td',function (e) {
+  // var id = $(this).arrt('id');
+  var id = $(this).closest('tr').attr('id');
+  var imsForm = document.getElementsByClassName("dsflskis")[0];
+  var imgUrl, gender;
+  imsForm.value = id;
+  document.location.hash="#"+id
+  $.ajax({
+    url: "{% url 'IMS_data' %}",
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      id: id,
+      },
+      success: function (data) {
+      if (data.is_taken) {
+        alert("Data not available.");
+      } else {
+        var obj =data;
+        $.each( obj, function( key, value ) {
+          $.each(value, function(k, v) {
+            if (k === 'fields') {
+                  $.each(v, function(i, n) {
+                    var x = document.getElementById('id_' + i);
+                    if ( i === 'img') {
+                      imgUrl = '/media/' + n;
+                      $('#imsProfileImg').attr("src", '/media/' + n);
+                    } else {
+                      x.value = n;
+                      if ( i  == 'Gender' ) {
+                        gender = n;
+                      }
+                    }
+                });
+              }
+          });
+        });
+        if ( imgUrl == '/media/' ) {
+          $('#imsProfileImg').attr("src", '/media/IfNone/' + gender + '.jpg');
+        }
+      }
+    },
+    error: function(xhr,errmsg,err) {
+      console.log(xhr.status + ":" + xhr.responseText);
+    }
+  });
+  srchResult = document.getElementById("searchInput");
+  srchResult = srchResult.value;
+  // imsModel.style.display='block';
+  openModal('imsDataModalForm');
+});
+
+$(window).bind("load", function() {
+  //  alert('done');
+});
+'{% endblock script %}'
+</script>

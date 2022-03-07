@@ -1,0 +1,53 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<div class="gp-display-container gp-tranparent">
+  <div id="imsDataModalForm" class="gp-modal gp-animate-opacity gp-center">
+    <div class="gp-modal-content gp-card-4 gp-round-large">
+      <header class="gp-container hdbg gp-center gp-boarder-bottom">
+        <h1 class="ga-text-black">            
+          <!-- <img src="{% static 'img\icons\Master\svg\Sponsor.svg' %}" alt="Sponsor Image" style="width:60px"> -->
+          &nbsp;<span>Profile</span>
+        </h1>
+      </header>
+      <div class="gp-container" style="padding-left:5px;padding-right:5px;margin: 0;">
+      <form method="POST" id="imsForm" action="" enctype="multipart/form-data" class="gp-container gp-light-grey gp-text-blue gp-center gp-round-large hdScb">
+        {% csrf_token %}
+        <input class="dsflskis" type="hidden" value="xyz" name='id'>
+          <div class="gp-row gp-disp">
+            <div class="gp-col l3 m12 s12 gp-light-grey" id="imsImgContainer">
+              <div class="gp-container gp-light-grey gp-round">
+                <div class="gp-display-container" style="padding: 5px; border-bottom: 1px solid red;">
+                  <img src="{% static 'img\icons\Master\svg\loading.svg' %}" id="imsProfileImg" alt="Profile Picture">
+                  <!-- <img src="{% static 'img\icons\Master\png\Not-known.png' %}" id="imsProfileImg" alt="Profiel Picture"> -->
+                  <i class="material-icons gp-display-topright gp-button gp-hover-none" onclick="document.getElementById('id_img').click()" style="font-size:20px;color:red">
+                    edit
+                  </i>
+                </div>
+                <input type="file" name="img" accept="image/*" class="gp-input gp-boarder imsFormInput gp-hide" placeholder="img" style="text-transform: capitalize;display: none;" id="id_img">
+              </div>
+            </div>
+            <div class="gp-col l9 m12 s12 gp-dsi" id="imsFormFieldInput">
+              {% for field in frmObj %}
+              {% if field.id_for_label != 'id_img' %}
+                <div class="gp-row gp-section gp-panel gp-round" style="margin: 0;">
+                  <!-- <i class="gp-xxlarge fa fa-user"></i> -->
+                  <div class="gp-col gp-left-align l3 m3 s12">{{ field.label_tag }}</div>
+                  <div class="gp-col gp-left-align l8 m8 s12 gp-text-black">
+                    {{ field }}
+                  </div>
+                </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        <Button type="submit" value="submit" class="gp-hide" id="frmButton">Update</Button>
+      </form>
+      </div>
+      <footer class="gp-container gp-center gp-border-top ftbg">
+        <button type="submit" class="gp-button gp-section gp-blue gp-ripple gp-hide" id="frmUpdate"> Update </button>
+        <button type="button" class="gp-button gp-section gp-ripple gp-red" id="frmClose">Close</button>
+      </footer>
+    </div>
+  </div>
+</div>

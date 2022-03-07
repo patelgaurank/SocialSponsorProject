@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{% block titleName %}Login Page.{% endblock %}</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'gp.css' %}" type="text/css" />
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+}
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
+}
+@media screen and (max-width: 601px) {
+    .optMenue {
+        margin-left: 50vw;
+      }
+    }
+
+</style>
+</head>
+<body>
+{% block content %}
+<div class="gp-container gp-padding-64 gp-center" id="dashboard">
+
+  <div class="gp-display-topleft gp-padding-large gp-xlarge">
+    Logo
+  </div>
+  <div class="gp-display-middle">
+    <h1 class="gp-jumbo gp-animate-top">COMING SOON</h1>
+    <hr class="gp-border-grey" style="margin:auto;width:40%">
+    <p class="gp-large gp-center">Few days left</p>
+  </div>
+  <div class="gp-display-bottomleft gp-padding-large">
+
+  </div>
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+<script>
+'{% block script %}'
+'{% endblock script %}'
+</script>
+</body>
+</html>

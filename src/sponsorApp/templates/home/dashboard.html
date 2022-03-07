@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titleName %}Dashboard{% endblock %}
+{% block content %}
+<div class="gp-content gp-center" style="max-width:1400px;" id="dashboard" ref="dashboardview">
+  <div class="gp-container gp-padding gp-hide-large gp-hide-medium">
+    <p style="font-size: min(3vw, 500px);"><button class="gp-button gp-block gp-text-white">{{ user.first_name }} {{ user.last_name }}</button></p>
+  </div>
+  <div class="gp-row-padding spdbrow">
+    <div class="gp-quarter gp-hide-small spdbuserrowcolumn" id="dashboarduserinfo">
+      <div class="gp-white gp-text-grey gp-card spdbsidebarcolumn">
+        <div class="gp-display-container spdbusercontainer">
+          <img class="spdbuserimage" src="{% static 'img\icons\Master\png\User.png' %}" style="width:100%;" alt="Avatar">
+          <div class="gp-display-bottomiddle gp-container gp-text-black spdbusertitle">
+            <h2 class="spdbusername"><strong>{{ user.first_name }} {{ user.last_name }}</strong></h2>
+          </div>
+        </div>
+      <hr>
+
+      <div>
+        <div class="gp-container gp-white gp-round">
+            <div class="gp-row gp-theme-l1 gp-left-align" style="margin:10px;">
+              <div class="gp-col l12 m12 s12">
+                <img class="gp-margin-right" src="{% static 'img\icons\Master\svg\LocationPoint.svg' %}" style="height:20px;width:20px" alt="Icon" /><span id="UserLocation">Unknown</span>
+              </div>
+            </div>
+            <div class="gp-row gp-theme-l1 gp-left-align" style="margin:10px;">
+              <div class="gp-col l12 m12 s12">
+                <img class="gp-margin-right" src="{% static 'img\icons\Master\svg\UserGroup.svg' %}" style="height:20px;width:20px" alt="Icon" />
+                <span>Sponsor Team</span>
+              </div>
+            </div>
+            <div class="gp-row gp-theme-l1 gp-left-align" style="margin:10px;">
+              <div class="gp-col l12 m12 s12">
+                <i class="fa fa-calendar-check-o fa-fw gp-margin-right"></i>
+                <span> {{ lstTimeStamp }}</span>
+              </div>
+            </div>
+        </div>
+      </div>
+
+    <!-- Right Column -->
+    <!-- <div class="gp-col m3" style="padding:5px 5px 5px 5px;"> -->
+
+      <!-- Events -->
+      <div>
+        <hr>
+        <p class="gp-round gp-margin-left gp-left-align gp-text-black" id="ueTitle"><strong>Upcoming Events</strong></p>
+        <div class="gp-container gp-white gp-round">
+          <ul class="gp-ul">
+            <li class="gp-display-container gp-left-align" id="ue1">Event - 1 <span class="gp-transparent gp-display-right">##/##/####</span></li>
+            <li class="gp-display-container gp-left-align" id="ue2">Event - 2 <span class="gp-transparent gp-display-right">##/##/####</span></li>
+            <li class="gp-display-container gp-left-align" id="ue3">Event - 3 <span class="gp-transparent gp-display-right">##/##/####</span></li>
+          </ul>
+        </div>
+      </div>
+    <!-- </div> -->
+
+      <!-- Message Box -->
+      <div>
+        <hr>
+        <p class="gp-round gp-margin-left gp-left-align gp-text-black" id="ntfTitle"><strong>Need to focus</strong>
+          <span class="gp-transparent gp-right gp-medium gp-hover-none gp-margin-right">+</span>
+        </p>
+        <div class="gp-container gp-white gp-round">
+          <ul class="gp-ul">
+            <li class="gp-display-container gp-left-align">xxx
+              <span class="gp-button gp-transparent gp-display-right gp-hoverable gp-medium material-icons">close</span></li>
+            <li class="gp-display-container gp-left-align">xxx
+              <span class="gp-button gp-transparent gp-display-right gp-medium material-icons">close</span></li>
+            <li class="gp-display-container gp-left-align">xxx
+              <span class="gp-button gp-transparent gp-display-right gp-medium material-icons">close</span></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Current User -->
+      <div>
+        <hr>
+        <p class="gp-round gp-margin-left gp-left-align gp-text-black"><strong>Active User</strong></p>
+        <div class="gp-container gp-white gp-round">
+          <ul class="gp-ul" id="userList">{% autoescape off %}{{ userList|safe }}{% endautoescape %}</ul>
+        </div>
+      </div>
+      <!-- End Left Column -->
+      </div>
+      <br>
+    </div>
+
+    <!-- Middle Column -->
+    <div class="gp-threequarter">
+
+      <div class="gp-panel">
+      <div class="gp-row" style="margin: -16px -16px;">
+        <div class="gp-col m6 s6 gp-round">
+          <div class="gp-row">
+            <div class="gp-col gp-white">
+              <div class="gp-display-container gp-padding">
+                <div class="gp-row">
+                  <p class="gp-center l12 m12 s12"><b class="gp-large"><strong>{{ crtYrObj }}</strong></b></p>
+                  <p class="gp-center l12 m12 s12">
+                    <hr>
+                    <div class="gp-tag gp-round gp-red gp-padding">
+                      <b class="gp-tag gp-xlarge gp-red gp-border gp-border-white gp-text-white"><strong id='spTotal'>{{ ttSpObj }}</strong></b>
+                    </div>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gp-col m6 s6">
+          <div class="gp-row">
+            <div class="gp-col gp-white">
+              <div class="gp-container gp-padding">
+                <div class="gp-row">
+                  <p class="gp-center l12 m12 s12"><b class="gp-large"><strong>{{ crtDtObj }}</strong></b></p>
+                  <p class="gp-center l12 m12 s12">
+                    <hr>
+                    <div class="gp-tag gp-round gp-red gp-padding">
+                      <b class="gp-tag gp-xlarge gp-red gp-border gp-border-white gp-text-white"><strong id='spTotal'>{{ tdSpObj }}</strong></b>
+                    </div>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Sponsor By Purpose Code -->
+      <div class="gp-panel">
+      <div class="gp-row-padding" style="margin: 0 -30px;">
+        <div class="gp-half">
+          <p class="gp-blue"><strong></strong><div id="sptTitle1" class="gp-btn1 gp-padding gp-blue gp-round" style="width: 100%;">
+            <!-- <i class="material-icons gp-left sarw" id="sarw">arrow_downward</i> -->
+            <span>Most Recent Sponsor</span>
+            <!-- <i class="material-icons gp-right sarw" id="sarw">arrow_downward</i> -->
+          </div></p>
+          <div class="gp-container gp-card gp-white gp-round gp-margin-bottom gp-show" id="sponsorDetailTable">
+            <div class="gp-responsive gp-margin-bottom gp-margin-top">
+            <table class="gp-table gp-striped gp-bordered gp-border gp-hoverable gp-white" id="dbSpTable">
+              {% autoescape off %}{{ CurrentSpData }}{% endautoescape %}
+            </table>
+            </div>
+          </div>
+        </div>
+        <div class="gp-half">
+          <p class="gp-blue gp-round"><strong></strong><div id="spptTitle1" class="gp-btn1 gp-padding gp-blue gp-round" style="width: 100%;">
+            <span>Sponsor By Purpose</span>
+          </div></p>
+          <p class="gp-blue"><strong></strong></p>
+          <div class="gp-container gp-white gp-card-4 gp-round gp-show purposeTableOutPut" id="purposeDetailTable">
+            <ul class="gp-ul">
+              <li class="gp-display-container gp-left-align">xxx <span class="gp-transparent gp-display-right">125</span></li>
+              <li class="gp-display-container gp-left-align">xxx <span class="gp-transparent gp-display-right">125</span></li>
+              <li class="gp-display-container gp-left-align">xxx <span class="gp-transparent gp-display-right">125</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    </div>
+    <!-- End Middle Column -->
+    </div>
+
+  </div>
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+<script>
+'{% block script %}'
+  // getLocation();
+  if ($('#UserLocation:contains("Unknown")')) {
+    if ( locCity === '' || locCity === 'None' ) {
+      readLocationData();
+      console.log(locCity + ' ----- ' + locState);
+    } else {
+      $('#UserLocation').text(locCity + ', ' + locState);
+      // console.log(locCity + ' ' + locState);
+    }
+  }
+
+  function readLocationData() {
+      $.getJSON('https://api.ipdata.co?api-key=790f45fb8fa88b60ca7f4a7e08004c5dad111c259e8bdb5ede84695f', function(data) {
+        var locAddress = JSON.stringify(data, null, 2);
+        $('#UserLocation').text(JSON.parse(locAddress)['city'] + ', ' + JSON.parse(locAddress)['region_code']);
+          $.ajax({
+            type: "POST",
+            url: "{% url 'Sponsor_Dashboard.' %}",
+            data: {
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              locAddress: locAddress,
+            },
+            success: function(data) {
+              var obj = data;
+              $.each( obj, function( key, value ) {
+                if ( key === 'userCity' ) {
+                  locCity = value;
+                } else if ( key === 'userState' ) {
+                  locState = value;
+                }
+                $('#UserLocation').text(locCity + ', ' + locState);
+                // if ( value !== null ) {
+                //   $('#UserLocation').text(value[0] + ', ' + value[2])
+                //   locCity = value[0];
+                //   locState = value[2];
+                // }
+              });
+            },
+              error: function(xhr, textStatus, errorThrown) {
+              alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+              }
+          });
+      });
+  };
+
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+			function(position){
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        // codeLatLng(lat, lng)
+        var locLatLag = lat + ', ' + lng;
+        var n = locLatLag.toString();
+
+        $.ajax({
+          type: "POST",
+          url: "{% url 'Sponsor_Dashboard.' %}",
+          data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            locLatLag: n,
+          },
+          success: function(data) {
+              var obj = data;
+              $.each( obj, function( key, value ) {
+                console.log(value);
+                if ( key === 'userCity' ) {
+                  locCity = value;
+                } else if ( key === 'userState' ) {
+                  locState = value;
+                }
+                $('#UserLocation').text(locCity + ', ' + locState);
+              });
+            },
+            error: function(xhr, textStatus, errorThrown) {
+            alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+            }
+        });
+
+
+			},
+			function errorCallback(error) {
+            	//do error handling
+	        },
+        	{
+    	        maximumAge:Infinity,
+        	    timeout:30000
+	        }
+			);
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
+	};
+
+  function codeLatLng(lat, lng) {
+
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+      console.log(results)
+        if (results[1]) {
+        //formatted address
+        alert(results[0].formatted_address)
+        //find country name
+            for (var i=0; i<results[0].address_components.length; i++) {
+            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                    //this is the object you are looking for
+                    city= results[0].address_components[i];
+                    break;
+                }
+            }
+        }
+        //city data
+        alert(city.short_name + " " + city.long_name)
+
+
+        } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  };
+
+  document.addEventListener('click', function(e){
+    var id = (event.target).id;
+    if ( id === "spptTitle" ) {
+      dropDownSelection('purposeTable', 'parw');
+    } else if ( id === "sptTitle" ) {
+      dropDownSelection('sponsorTable','sarw');
+    }
+  });
+
+  //Droup down selection
+  function dropDownSelection(rwId, arwId) {
+    var x = document.getElementById(rwId);
+    var y = document.getElementsByClassName(arwId);
+    if (x.className.indexOf("gp-show") == -1) {
+      x.className += " gp-show";
+      for(var n=0; n<y.length; n++) {
+        y[n].innerText = y[n].innerText.replace("arrow_downward", "arrow_upward");
+      }
+    } else {
+      x.className = x.className.replace(" gp-show", "");
+      for(var n=0; n<y.length; n++) {
+        y[n].innerText = y[n].innerText.replace("arrow_upward", "arrow_downward");
+      }
+    }
+  };
+'{% endblock script %}'
+</script>

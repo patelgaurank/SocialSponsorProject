@@ -1,0 +1,293 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block titleName %}Purpose{% endblock %}
+{% block content %}
+<!-- Team Container -->
+<div class="gp-container" id="team">
+  <div class="gp-bar">
+    <input class="gp-bar-item gp-input gp-right gp-transparent gp-text-white gp-border-0 gp-border-bottom" type="text" placeholder="Search sponsor.." id="searchInput" onkeyup="mySearchFunction('purposeTable')">
+  </div>
+  <div class="gp-display-container gp-hide-small" id="pContainerLarge">
+    <div class="gp-responsive gp-round hdScb" id="sponsorTableResponsive">
+      <table class="gp-table-all gp-hoverable gp-card-4" id="purposeTable">
+        <img class="gp-display-middle" src="{% static 'img\icons\Master\svg\loading.svg' %}" id="Loading" alt="Loading" style="width:40px">        
+      </table>
+    </div>
+  </div>
+  <div class="gp-display-container gp-center gp-hide-large gp-hide-medium" id="pContainerSmall">
+    <div class="gp-responsive gp-round hdScb" id="sponsorTableResponsive">
+    <!-- <table class="gp-table gp-striped gp-bordered gp-border gp-hoverable gp-white" id="purposeTable"> -->
+      <div class="gp-hoverable" id="purposeTable">
+        <img class="gp-display-middle" src="{% static 'img\icons\Master\svg\loading.svg' %}" id="Loading" alt="Loading" style="width:30px">
+      </div>
+    <!-- </table> -->
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+<script>
+'{% block script %}'
+
+var lstSp = ['pContainerLarge', 'pContainerSmall'];
+lstSp.forEach(remvoeElements);
+function remvoeElements(item) {
+  var elm = $('#'+item);
+  if ( elm.css("display") === 'none' ) {
+    elm.remove();
+  } else if ( elm.css("display") !== 'none' ) {
+    $.ajax({
+    url: "{% url 'Purpose_Code' %}",
+    type: 'POST',
+    data: {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      itemData: item,
+      },
+      success: function (data) {
+      if (data.is_taken) {
+        alert("Data not available.");
+      } else {
+        var obj =data;
+        $('#purposeTable').append(obj);
+        $('#Loading').remove();
+      }
+    },
+    error: function(xhr,errmsg,err) {
+      console.log(xhr.status + ":" + xhr.responseText); 
+    }
+  });
+  };
+}
+
+// Search all columns from sponsor table
+function mySearchFunction(tblName) {
+  var input, filter, table, tr, td, i, idTag;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();  
+  table = document.getElementById(tblName);
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    if (i>0) {
+      txtValue = tr[i].textContent || tr[i].innerText
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {        
+        tr[i].style.display = "none";
+      }      
+    }
+  }
+}
+
+function sortTable(n) {  
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("purposeTable");
+  switching = true;  
+  dir = "asc"; 
+  while (switching) {    
+    switching = false;
+    rows = table.rows;    
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;      
+      x = rows[i].getElementsByTagName("td")[n];
+      y = rows[i + 1].getElementsByTagName("td")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+$("#purposeTable").on('click','td',function (e) {
+  // var id = $(this).arrt('id');
+  var id = $(this).closest('tr').attr('id');
+  var spModel = document.getElementById('sponsorModal');
+  var spFrmButton = document.getElementById('frmSubmitUpdate');
+  var spForm = document.getElementsByClassName("dsflskis")[0];
+  spForm.value = id;
+  $.ajax({
+    url: "{% url 'Sponsor_data' %}",
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      id: id,
+      },
+      success: function (data) {
+      if (data.is_taken) {
+        alert("Data not available.");
+      } else {
+        var obj =data;
+        console.log(obj);
+        $.each( obj, function( key, value ) {
+          $.each(value, function(k, v) {
+            if (k === 'fields') {
+                  $.each(v, function(i, n) {
+                    var x = document.getElementById('id_' + i);
+                    x.value = n;
+                });
+              }
+          });
+        });
+      }
+    },
+    error: function(xhr,errmsg,err) {
+      console.log(xhr.status + ":" + xhr.responseText); 
+    }
+  });
+  spModel.style.display='block';
+  spFrmButton.innerText = "Update";
+});
+
+// onclick="closeModal('sponsorModal');window.location.href = '/sponsor/dashboard'"
+$("#frmClose").click(function() {
+  closeModal('sponsorModal');
+  // window.location.href = '/sponsor/sponsordata';
+});
+// 
+$("#frmSubmitUpdate").click(function() {
+  document.getElementById('frmButton').click()
+  closeModal('sponsorModal');
+  // window.location.href = '/sponsor/sponsordata';
+});
+// Open up modal
+function openModal(mdlStr) {
+  document.getElementById(mdlStr).style.display="block";
+}
+// close up modal
+function closeModal(mdlStr) {
+  document.getElementById(mdlStr).style.display="none";
+}
+
+document.addEventListener('click', function(e){
+    var id = (event.target).id;
+    if ( id.match(/nxtBtn.*/) || id.match(/prvBtn.*/) ) {
+      var opc = Number(window.getComputedStyle(event.target).getPropertyValue("opacity"));
+      if ( $("#"+id).css('opacity') === '1' ) {
+        $("#"+id).animate({opacity: '0.7'});
+        $("#"+id).animate({opacity: '0'});
+      } else {
+        $("#"+id).animate({opacity: '0.7'});
+        $("#"+id).animate({opacity: '0'});
+      }
+      if ( id.match(/nxtBtn.*/) ) {
+        var cls = document.getElementsByClassName("dp"+id.substring(6));
+        for ( i=0;i<=cls.length+1;i++ ) {
+          var elm = $(cls[i]).hasClass('gp-hide');
+          if ( !elm ) {
+            $(cls[i]).addClass('gp-hide');
+            var x=i+1;if(i===2){x=0};
+            $(cls[x]).removeClass('gp-hide');
+            break
+          };
+        };
+      };
+      if ( id.match(/prvBtn.*/) ) {
+        var cls = document.getElementsByClassName("dp"+id.substring(6));
+        for ( i=0;i<=cls.length+1;i++ ) {
+          var elm = $(cls[i]).hasClass('gp-hide');
+          if ( !elm ) {
+            $(cls[i]).addClass('gp-hide');
+            var x=i-1;if(i===0){x=2};
+            $(cls[x]).removeClass('gp-hide');
+            break
+          };
+        };
+      };
+    };
+});
+
+document.addEventListener('swip', function(e){    
+    alert(e.target);
+});
+
+'{% endblock script %}'
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+// function myFunction() {
+//   document.getElementById("myDropdown").classList.toggle("show");
+// }
+
+// function myFilterFunction(n) {
+//   var input, filter, ul, li, a, i;
+//   input = document.getElementById("searchInput");
+//   filter = input.value.toUpperCase();
+//   div = document.getElementById("myDropdown");
+//   a = div.getElementsByTagName("td")[n];
+//   for (i = 0; i < a.length; i++) {
+//     txtValue = a[i].textContent || a[i].innerText;
+//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//       a[i].style.display = "";
+//     } else {
+//       a[i].style.display = "none";
+//     }
+//   }
+// }
+//on tr clicked
+// var tbl = document.getElementById("sponsorTable");
+// var tbody = tbl.getElementsByTagName("tbody")[0];
+// if (tbody != null) {
+//     for (var i = 0; i < tbody.rows.length; i++) {
+//       tbody.rows[i].onclick = function () { getval(this); };
+//         /*for (var j = 0; j < tbl.rows[i].cells.length; j++)
+//             tbl.rows[i].cells[j].onclick = function () { getval(this); };*/
+//     }
+// }
+
+
+  // Input Autocomplete
+//   $(document).ready(function(){
+//   $("input").keyup(function() {
+//     var $this = $(this);
+//     if ((this.name).indexOf("Name") === -1) {return false};
+//     $.ajax({
+//       url: "{% url 'Sponsor_Form' %}",
+//       type: "POST",
+//       data: {
+//         csrfmiddlewaretoken: '{{ csrf_token }}',
+//         lst: this.id+'-'+this.value,
+//       },
+//       success: function(data) {
+//         var result = [];        
+//         data = JSON.parse(data);
+//         len = data.length;
+//       for (i = 0; i < len; i++) {
+//         result.push({
+//           label: data[i],
+//           value: data[i]
+//         });
+//       }
+//       $this.autocomplete({
+//         autoFocus: true,
+//         source: result,
+//         minLength: 1,
+//         select: function(event, ui) {
+//           var item = ui.item;
+//           if (item) {
+//             console.log(item);
+//           }
+//         }
+//       });
+//       },  
+//     });
+//   });
+// });
+
+</script>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titleName %}Logout Page{% endblock %}
+{% block content %}
+<div class="gp-container">
+	<div id="loginModal" class="gp-modal gp-padding-64">
+		<div class="gp-modal-content gp-card-4 gp-animate-zoom myForm" style="min-width:300px;max-width:600px">
+		  <header class="gp-container gp-center gp-boarder-bottom gp-padding hdbg">
+			<h1 class="ga-text-white">
+				<img src="{% static 'img\icons\Master\svg\UserLogin.svg' %}" alt="Avatar" style="width:100px" class="gp-margin-top">
+			</h1>
+		  </header>
+			<div class="gp-container gp-center gp-white">
+				<a href="{% url 'login' %}" class="gp-large gp-text-white gp-wide"><b class="gp-xlarge gp-text-red">Click here to login again.</b></a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+<script>
+'{% block script %}'
+	// Open up modal
+	function openModal(mdlStr) {
+		document.getElementById(mdlStr).style.display="block";
+	}
+
+	// close up modal
+		function closeModal(mdlStr) {
+		document.getElementById(mdlStr).style.display="none";
+	}
+
+    // Open up on page load //
+    document.addEventListener('DOMContentLoaded', function() {
+        openModal('loginModal');
+    }, false);
+	// Modal Image Gallery
+	function onClick(element) {
+	  document.getElementById("img01").src = element.src;
+	  document.getElementById("modal01").style.display = "block";
+	  var captionText = document.getElementById("caption");
+	  captionText.innerHTML = element.alt;
+	}
+	// Open up login model
+	$(document).ready(function(){
+		openModal('loginModal');
+    });
+'{% endblock script %}'
+</script>

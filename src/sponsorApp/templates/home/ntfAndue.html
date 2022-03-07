@@ -1,0 +1,22 @@
+{% load static %}
+{% load widget_tweaks %}
+<div id="sponsorModal" class="gp-modal gp-animate-opacity">
+  <div class="gp-modal-content gp-card-4">
+    <header class="gp-container gp-center gp-boarder-bottom hdbg">
+      <h1 class="ga-text-black">            
+        <img src="{% static 'img\icons\Master\svg\Sponsor.svg' %}" alt="($)" style="width:60px">
+        &nbsp;<span>Sponsor</span>
+      </h1>
+    </header>
+    <form method="POST" id="sponsorForm" action="" class="gp-container gp-light-grey gp-text-blue gp-center gp-round-large hdScb"> {% csrf_token %}
+      <input class="dsflskis" type="hidden" value="xyz" name='id'>
+
+      <Button type="submit" value="submit" class="gp-hide" id="frmButton">Submit/Update</Button>
+    </form>
+    <footer class="gp-container gp-center gp-border-top ftbg">
+      <button class="gp-button gp-section gp-blue gp-ripple" id="frmSubmitUpdate"> Submit </button>
+      <button type="button" class="gp-button gp-red" id="frmClose">Close</button>
+      <!--  onclick="document.getElementById('frmButton').click();closeModal('sponsorDataModalForm');"onclick="closeModal('sponsorDataModalForm');" -->
+    </footer>
+  </div>
+</div>

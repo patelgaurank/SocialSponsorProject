@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{% block titleName %}Login Page.{% endblock %}</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'gp.css' %}" type="text/css" />
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+  }
+  .vl {
+    border-left: 6px solid green;
+    height: 500px;
+  }
+
+  /* Chrome, Safari and Opera syntax */
+  :-webkit-full-screen {
+    background-color: yellow;
+  }
+  
+  /* Firefox syntax */
+  :-moz-full-screen {
+    background-color: yellow;
+  }
+  
+  /* IE/Edge syntax */
+  :-ms-fullscreen {
+    background-color: yellow;
+  }
+  
+  /* Standard syntax */
+  :fullscreen {
+    background-color: yellow;
+  }
+  
+  /* Style the button */
+  button {
+    padding: 20px;
+    font-size: 20px;
+  }
+  
+  table, th, td {
+  border: 1px solid black;
+  }
+  @media screen and (max-width: 601px) {
+    .optMenue {
+        margin-left: 50vw;
+      }
+    }
+  </style>
+  </head>
+  <body>
+{% block content %}
+<div class="gp-container gp-padding-64 gp-center" id="mySlides">
+
+
+        <img src="{% static 'img\PPTBG.jpg' %}" control id="pptDisplay" style="width:100%; height:100%">
+        <div class="gp-display-middle" style="width:90%; height:90%; margin-top:180px">
+          <div class="gp-responsive gp-xlarge">
+            <table class="gp-table">
+              <col span="1" style="width: 50%;">
+              <col span="1" style="width: 25%;">
+              <col span="1" style="width: 25%;">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Points</th>
+            </tr>
+            <tr>
+              <td>Jill</td>
+              <td>Smith</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Eve</td>
+              <td>Jackson</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td>Adam</td>
+              <td>Johnson</td>
+              <td>67</td>
+            </tr>
+            <tr>
+              <td>Jill</td>
+              <td>Smith</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Eve</td>
+              <td>Jackson</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td>Adam</td>
+              <td>Johnson</td>
+              <td>67</td>
+            </tr>
+            <tr>
+              <td>Jill</td>
+              <td>Smith</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Eve</td>
+              <td>Jackson</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td>Adam</td>
+              <td>Johnson</td>
+              <td>67</td>
+            </tr>
+            <tr>
+              <td>Jill</td>
+              <td>Smith</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Eve</td>
+              <td>Jackson</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td>Adam</td>
+              <td>Johnson</td>
+              <td>67</td>
+            </tr>
+            </table>
+            </div>
+                    <!-- <iframe width="95%" height="95%" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+        </iframe> -->
+        <!-- <video width="100%" controls id="myvideo">
+          <source src="https://www.youtube.com/watch?v=kNd_vSWOvQE" type="video/mp4">
+          <source src="rain.ogg" type="video/ogg">
+          Your browser does not support the video tag.
+        </video> -->
+        </div>
+        <div class="gp-display-bottomright">
+          <a class="glyphicon glyphicon-fullscreen gp-button gp-transparent" onclick="openFullscreen('mySlides', 'pptDisplay');" id="flBtn"></a>          
+        </div>          
+        <div class="gp-display-right gp-margin-right gp-hover-shadow gp-large">
+          <a class="next fa fa-arrow-circle-right" onclick="plusSlides(1)"></a>          
+        </div>          
+        <div class="gp-display-left gp-margin-left gp-hover gp-large">
+          <a class="prev fa fa-arrow-circle-left" onclick="plusSlides(-1)"></a>
+        </div>          
+      
+    </div>
+  <script>
+  function openFullscreen(elmId, pptId) {
+    var elem = document.getElementById(elmId);
+    var pptElem = document.getElementById(pptId);
+    pptElem.style.width="100%";
+    pptElem.style.height="100%";
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+    closeFullscreen()
+  }
+  function closeFullscreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }  
+  </script>
+
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+</body>
+</html>

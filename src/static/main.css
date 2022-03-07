@@ -1,0 +1,618 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+nav ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+} /* change colours to suit your needs */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+} /* change colours to suit your needs */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+del {
+  text-decoration: line-through;
+}
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+} /* change border colour to suit your needs */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+input,
+select {
+  vertical-align: middle;
+} /* End of reset styling */
+body {
+  /* background-image: url("{% static 'img/' %}{{ request.get_full_path|slice:'1:'|slice:':-1' }}1CB.svg");  */
+  background-image: url("img/RosePetals.svg"); /* background-color: lightslategrey; */
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto !important;
+  height: 100vh;
+  width: 100%;
+  line-height: 1; /* font-size: calc( [minimum size] + ([maximum size] - [minimum size]) * ( (100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width]) ) ); */
+  overflow-y: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+#allContainer {
+  margin-top: 52px;
+  height: min(95.5vh, 1940px);
+} /* #team { margin-top: 6vh; height: 93.5vh; } */ /* #dashboard { margin-top: 65px; }  */ /* Sidbar and nabar */
+.bsNB {
+  min-height: 3vh;
+}
+.bsNB {
+  padding: 5px;
+}
+.bsSBB {
+  padding: 16px;
+  margin-bottom: 5px;
+}
+.ssSBB {
+  padding: 16px;
+} /* Zoom on Hover */
+.gp-zoom:hover {
+  -ms-transform: scale(1.01); /* IE 9 */
+  -webkit-transform: scale(1.01); /* Safari 3-8 */
+  transform: scale(1.01);
+}
+#dbSpTableBody {
+  font-size: 16px;
+} /* Alert message */
+#userStatus {
+  width: auto;
+  height: 40px;
+  margin-bottom: 2%;
+} /* Modal header backgroud */
+.hdbg {
+  background-image: url("img/DiamondSunset.svg");
+} /* Modal footer backgroud */
+.ftbg {
+  background-image: url("img/DiamondSunset.svg");
+} /* Search bar setting */
+#searchInput {
+  background-image: url("img/icons/Master/svg/SearchUser.svg");
+  background-position: 5px 5px;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  width: 30%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+::placeholder {
+  color: white;
+  opacity: 1;
+  padding-left: 10px;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
+} /* Sponsor Table setting */
+#sponsorTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+#sponsorTable th,
+#sponsorTable td {
+  text-align: left;
+  padding: 12px;
+}
+#sponsorTable tr {
+  border-bottom: 1px solid #ddd;
+}
+#sponsorTable tr.header,
+#sponsorTable tr:hover {
+  background-color: #f1f1f1;
+} /* Slide template */
+#pptSlidesContainer {
+  padding: 0 0 0 0;
+  height: inherit;
+}
+#pptDisplay {
+  width: 100%;
+  height: 90vh;
+}
+.shImg {
+  background-image: url("img\PPTBG.jpg");
+  background-position: center;
+  background-attachment: initial;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+.slFClm,
+.slSClm {
+  font-size: 42px;
+  border-width: 0.001em;
+  border-style: solid;
+  height: 0.5em;
+}
+.anFClm {
+  font-size: 30px;
+}
+.slFClm {
+  border-color: rgb(169, 16, 169);
+  color: rgb(0, 0, 139);
+}
+.slSClm {
+  border-color: rgb(169, 16, 169);
+  color: rgb(128, 0, 32);
+}
+#cngDpTitle {
+  width: 90%;
+  height: 90%;
+  margin-top: 5px;
+  font-size: 70px;
+  font-family: Rockwell, "Courier New", Courier, Georgia, Times,
+    "Times New Roman", serif;
+  text-decoration: underline;
+  color: rgb(255, 0, 0);
+  position: absolute;
+}
+#cngDpTable {
+  width: 100%;
+  height: 90%;
+  margin-top: 120px;
+  position: absolute;
+}
+#imsTableResponsive,
+#sponsorTableResponsive {
+  height: 87vh;
+  z-index: 0;
+  overflow: scroll;
+} /* IMS, Sponsor Form */
+#imsDataModalForm,
+#sponsorModal {
+  padding-top: 15px;
+  margin-top: 49px;
+  z-index: auto;
+  position: fixed;
+}
+#sponsorForm {
+  height: 75vh;
+  z-index: 0;
+  overflow: scroll;
+}
+#imsForm {
+  height: 75vh;
+  z-index: 0;
+  overflow: scroll;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 0;
+}
+#imsFormFieldInput,
+#spFormFieldInput {
+  font-size: 14px;
+}
+#imsImgContainer {
+  padding-right: 10px;
+  position: sticky;
+  top: 0;
+}
+#imsProfileImg {
+  width: 100%;
+  height: 150px;
+} /* Hide scrollbar for Chrome, Safari and Opera */
+.hdScb::-webkit-scrollbar {
+  display: none;
+} /* Hide scrollbar for IE and Edge */
+.hdScb {
+  -ms-overflow-style: none;
+}
+#dpBtn {
+  width: 100px;
+} /* Extra small devices (phones, 600px and down) */ /* @media only screen and (max-width: 600px) {...} */ /* Small devices (portrait tablets and large phones, 600px and up) */ /* @media only screen and (min-width: 600px) {...} */ /* Medium devices (landscape tablets, 768px and up) */ /* @media only screen and (min-width: 768px) {...} */ /* Large devices (laptops/desktops, 992px and up) */ /* @media only screen and (min-width: 992px) {...} */ /* Extra large devices (large laptops and desktops, 1200px and up) */ /* @media only screen and (min-width: 1200px) {...} */ /* For Small Screen or Mobile screen */
+@media screen and (max-device-width: 400px) {
+  .main {
+    min-height: 100%;
+  }
+  #pptDisplay {
+    height: 100%;
+  }
+  span.txtSize {
+    font-size: 25px;
+  }
+  img.iconImg {
+    width: 30px;
+  }
+  .slFClm,
+  .slSClm {
+    font-size: 16px;
+    background-color: white;
+  }
+  .anFClm {
+    font-size: 16px;
+  }
+  #cngDpTable {
+    margin-top: 35px;
+  }
+  #cngDpTitle {
+    font-size: 18px;
+    margin-top: 1px;
+  }
+  #searchInput {
+    width: 100%;
+  }
+  #dbSpTableBody {
+    font-size: 12px;
+  } /* IMS, Sponsor Form */
+  #imsFormFieldInput,
+  #spFormFieldInput {
+    font-size: 12px;
+  }
+  #imsImgContainer {
+    padding-right: 0;
+    position: sticky;
+    top: 0;
+  }
+  #imsProfileImg {
+    width: 50%;
+    height: 100px;
+  }
+  #imsTableResponsive,
+  #sponsorTableResponsive {
+    height: 81vh;
+  }
+  #imsForm,
+  #sponsorForm {
+    height: 62vh;
+  }
+} /* Android note 6.5 inch screen */
+@media screen and (max-device-width: 812px) and (min-device-width: 400px) {
+  .main {
+    min-height: 100%;
+  }
+  #pptDisplay {
+    height: 100%;
+  }
+  span.txtSize {
+    font-size: 25px;
+  }
+  img.iconImg {
+    width: 30px;
+  }
+  .slFClm,
+  .slSClm {
+    font-size: 16px;
+    background-color: white;
+  }
+  .anFClm {
+    font-size: 16px;
+  }
+  #cngDpTable {
+    margin-top: 35px;
+  }
+  #cngDpTitle {
+    font-size: 18px;
+    margin-top: 1px;
+  }
+  #searchInput {
+    width: 100%;
+  }
+  #dbSpTableBody {
+    font-size: 12px;
+  } /* IMS, Sponsor Form */
+  #imsFormFieldInput,
+  #spFormFieldInput {
+    font-size: 12px;
+  }
+  #imsImgContainer {
+    padding-right: 0;
+    position: sticky;
+    top: 0;
+  }
+  #imsProfileImg {
+    width: 50%;
+    height: 100px;
+  }
+  #imsTableResponsive,
+  #sponsorTableResponsive {
+    height: 77vh;
+  }
+  #imsForm,
+  #sponsorForm {
+    height: 65vh;
+  }
+} /* Iphon x setting */
+@media screen and (max-device-width: 812px) and (min-device-width: 375px) {
+  .main {
+    min-height: 100%;
+  }
+  #pptDisplay {
+    height: 100%;
+  }
+  span.txtSize {
+    font-size: 25px;
+  }
+  img.iconImg {
+    width: 30px;
+  }
+  .slFClm,
+  .slSClm {
+    font-size: 16px;
+    background-color: white;
+  }
+  #cngDpTable {
+    margin-top: 35px;
+  }
+  #cngDpTitle {
+    font-size: 18px;
+    margin-top: 1px;
+  }
+  #searchInput {
+    width: 100%;
+  }
+  #dbSpTableBody {
+    font-size: 12px;
+  } /* IMS, Sponsor Form */
+  #imsFormFieldInput,
+  #spFormFieldInput {
+    font-size: 12px;
+  }
+  #imsImgContainer {
+    padding-right: 0;
+    position: sticky;
+    top: 0;
+  }
+  #imsProfileImg {
+    width: 50%;
+    height: 100px;
+  }
+  #imsTableResponsive,
+  #sponsorTableResponsive {
+    height: 85vh;
+  }
+  #imsForm,
+  #sponsorForm {
+    height: 70vh;
+  }
+} /* Smart ipad or android device */
+@media screen and (max-device-width: 1024px) and (min-device-width: 768px) {
+  .main {
+    min-height: 100%;
+  }
+  #pptDisplay {
+    height: 100%;
+  }
+  span.txtSize {
+    font-size: 25px;
+  }
+  img.iconImg {
+    width: 30px;
+  }
+  .slFClm,
+  .slSClm {
+    font-size: 15px;
+    background-color: white;
+  }
+  #cngDpTable {
+    margin-top: 35px;
+  }
+  #cngDpTitle {
+    font-size: 20px;
+    margin-top: 1px;
+  }
+  #searchInput {
+    width: 100%;
+  }
+  #dbSpTableBody {
+    font-size: 12px;
+  } /* IMS, Sponsor Form */
+  #imsFormFieldInput,
+  #spFormFieldInput {
+    font-size: 12px;
+  }
+  #imsImgContainer {
+    padding-right: 0;
+    position: sticky;
+    top: 0;
+  }
+  #imsProfileImg {
+    width: 50%;
+    height: 100px;
+  }
+  #imsTableResponsive,
+  #sponsorTableResponsive {
+    height: 90vh;
+  }
+  #imsForm,
+  #sponsorForm {
+    height: 77vh;
+  }
+}
+@media screen and (max-device-width: 1024px) and (min-device-width: 812px) {
+  .main {
+    min-height: 100%;
+  }
+  #pptDisplay {
+    height: 100%;
+  }
+  span.txtSize {
+    font-size: 25px;
+  }
+  img.iconImg {
+    width: 30px;
+  }
+  .slFClm,
+  .slSClm {
+    font-size: 15px;
+    background-color: white;
+  }
+  .anFClm {
+    font-size: 16px;
+  }
+  #cngDpTable {
+    margin-top: 35px;
+  }
+  #cngDpTitle {
+    font-size: 20px;
+    margin-top: 1px;
+  }
+  #searchInput {
+    width: 100%;
+  }
+  #dbSpTableBody {
+    font-size: 12px;
+  } /* IMS, Sponsor Form */
+  #imsFormFieldInput,
+  #spFormFieldInput {
+    font-size: 12px;
+  }
+  #imsImgContainer {
+    padding-right: 0;
+    position: sticky;
+    top: 0;
+  }
+  #imsProfileImg {
+    width: 50%;
+    height: 100px;
+  }
+  #imsTableResponsive,
+  #sponsorTableResponsive {
+    height: 90vh;
+  }
+  #imsForm,
+  #sponsorForm {
+    height: 80vh;
+  }
+}

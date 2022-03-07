@@ -1,0 +1,292 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 192.168.0.53:8000
+From: webmaster@localhost
+To: patelgaurank@gmail.com
+Date: Tue, 05 May 2020 17:44:25 -0000
+Message-ID: 
+ <158870066574.16660.15141854104906425632@WKSP0004232B.hsd1.ga.comcast.net.>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satsang Home.</title>  
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/Master/svg/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/Master/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/img/icons/Master/ico/favicon-16x16.png">
+  <!-- <link rel="manifest" href="/site.webmanifest" crossorigin="use-credentials"> -->
+  <link rel="manifest" href="/favicons/manifest.json>
+  <script src="/static/main.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/static/main.css" type="text/css" />
+  <link rel="stylesheet" href="/static/gp.css" type="text/css" />
+  <style>
+
+  </style>
+</head>
+<body>
+  <header>
+    
+<div class="gp-display-container">
+  <div class="gp-top">
+    <div class="gp-bar gp-white gp-card bsNB" id="bsNB">    
+      
+      <a href="javascript:void(0)" id="menu" class="gp-bar-item gp-button gp-wide gp-hide-small bsNBB" onclick="bigbar_open()"><i class="fa fa-bars"></i>&nbsp;<span>MENU</span></a>
+      
+      <div class="gp-display-middle"><h4 class="gp-bar-item gp-text-deep-purple"><strong id="barTitle"></strong></h4></div>
+      <div class="gp-right gp-hide-small">
+        
+          <a href="/accounts/logout/" class="gp-text-red gp-bar-item gp-button bsNBB" id="lgBtn"><i class="glyphicon glyphicon-log-in"></i>&nbsp;<span> Log-Out</span></a>
+          <div class="gp-text-black gp-bar-item gp-button gp-right bsNBB" id="userName"><span>Gaurank Patel</span></div>            
+        
+      </div>
+      <a href="javascript:void(0)" class="gp-bar-item gp-button gp-right gp-hide-large gp-hide-medium bsNBB" id="sideBarOpen" onclick="bar_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+    
+  <nav class="gp-sidebar gp-bar-block gp-card gp-animate-left gp-transparent bsSB" style="display:none;margin-top: 55px;width:200px" id="myBigSidebar">
+    <button class="gp-red gp-bar-item gp-button gp-large bsSBB" style="margin-bottom: 5px" onclick="bigbar_close()">Close &times;</button>  
+    <a href="/sponsor/dashboard" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Dashboard</span></a>
+    <a href="/sponsor/sponsorform" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Sponsor Form</span></a>
+    <a href="/sponsor/sponsordata" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Sponsor Data</span></a>
+    <a href="/ims/imsdata" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>IMS Data</span></a>
+    <a href="/sponsor/display" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Display</span></a>
+    <a href="/sponsor/announcer" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Announcer</span></a>
+    <a href="/sponsor/purposecode" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Purpose Code</span></a>
+    <a href="/sponsor/team" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Team</span></a>  
+  </nav>
+  
+  <nav class="gp-sidebar gp-bar-block gp-black gp-card gp-animate-left gp-hide-medium gp-hide-large ssSB" style="display:none;" id="ssSB">
+    <a href="javascript:void(0)" onclick="bar_close()" class="gp-bar-item gp-button gp-large gp-padding-16 ssSBB">Close ×</a>
+    
+      <a href="/sponsor/dashboard" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Dashboard</span></a>
+      <a href="/sponsor/sponsorform" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Sponsor Form</span></a>
+      <a href="/sponsor/sponsordata" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Sponsor Data</span></a>
+      <a href="/ims/imsdata" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>IMS Data</span></a>
+      <a href="/sponsor/display" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Display</span></a>
+      <a href="/sponsor/announcer" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Announcer</span></a>
+      <a href="/sponsor/purposecode" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Purpose Code</span></a>
+      <a href="/sponsor/team" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Team</span></a>  
+      <div class="gp-text-white gp-bar-item gp-button gp-wide gp-display-bottomleft ssSBB" id="userName"><span>Gaurank Patel</span></div>            
+      <a href="/accounts/logout/" onclick="bar_close()" class="gp-text-red gp-bar-item gp-button glyphicon glyphicon-log-in ssSBB" id="lgBtn"> Log-Out</a>
+    
+  </nav>
+</div>    
+  </header>  
+  <div class="main" id="allContainer">
+    <div class="gp-container gp-align-left gp-panel gp-card gp-white gp-text-black gp-hide">This is a notification!</div>
+    
+  
+        <h1>Password reset failed</h1>
+        <p>The password reset link was invalid, possibly because it has already been used. Please request a new password reset.</p>
+      
+    
+  </div>
+  
+
+
+
+
+
+
+
+    
+  
+
+<script>
+''
+  sessionSecurity.activity();
+  window.addEventListener("load", function() { window. scrollTo(0, 0); });  
+  function bigbar_open() {
+    document.getElementById("menu").style.display = "none";   
+    document.getElementById("allContainer").style.marginLeft = "200px";
+    ''
+    document.getElementById("myBigSidebar").style.display = "block";
+  }
+  
+  function bigbar_close() {
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("allContainer").style.marginLeft = "0%";
+    ''
+    document.getElementById("myBigSidebar").style.display = "none";
+  }
+
+  var mySidebar = document.getElementById("ssSB");
+  function bar_open() {
+    if (mySidebar.style.display === 'block') {
+      mySidebar.style.display = 'none';
+    } else {
+      mySidebar.style.display = 'block';
+    }
+  }
+  
+  function bar_close() {
+      mySidebar.style.display = "none";
+  }
+// Do not delete
+  // window.addEventListener('resize', function () {
+  //     myFunction('resize');
+  // });
+
+  // window.addEventListener("orientationchange", function() {
+  //     myFunction('orientation');
+  // });
+
+  // function myFunction(value) {
+  //     var x = 1;
+  //     if (value == 'resize') {
+  //       // do something
+  //       console.log($('#sponsorTableResponsive').height);
+  //       console.log('Window resize - '+ window.innerHeight + ' - ' + window.innerWidth);
+  //     } else if (value == 'orientation') {
+  //       // do something else
+  //       console.log('Window Orient - '+ window.innerHeight);
+  //     }
+  // } 
+
+''
+
+''
+
+
+// Run this on open window //
+// Open up on page load //
+''
+  document.addEventListener('DOMContentLoaded', function() {    
+    // console.log(getUA());
+    // if ( typeof locAddress === 'undefined' ) {
+    //   readLocationData();
+    //   console.log('Run');
+    // }
+    const ul1 = document.querySelector('#userList');
+    const mnContainer = document.querySelector('#allContainer');
+    var loc = window.location;
+    var pname = loc.pathname;
+    var uLio1, uLio;
+    var wsStart = 'ws://';
+      if (loc.protocol == 'https:') {
+        wsStart = 'wss://';
+      }        
+      const alertSocket = new ReconnectingWebSocket(
+        wsStart
+        + loc.host
+        + loc.pathname
+      );
+      alertSocket.onmessage = function(e) {
+        var setTm;        
+        var msgIn = JSON.parse(e.data);
+        if (msgIn.Desc === 'User Log In/Out.') {
+
+          if ('Gaurank' !== msgIn.username) {
+            var el = document.createElement("li");
+            $('#id_' + msgIn.username).remove();
+            var nodeLi, nodeSpan;
+            $(ul1).prepend(msgIn.uStatusList);
+            $(mnContainer).append(msgIn.uStatus);
+          }
+        } else if (msgIn.Desc === 'Sponsor Added/Updated') {
+          $('#spTotal').text(msgIn.spTotal);
+            $('#spTodayTotal').text(msgIn.spTodayTotal);
+            $('#dbSpTableBody').prepend(msgIn.spListHTML);
+            $(mnContainer).append(msgIn.spStatusHTML);
+        }
+        setTimeout(function(){
+              if ($('#appStatus').length > 0) {
+                $('#appStatus').remove();
+              }
+            }, 3000);
+      }
+      
+      alertSocket.onopen = function(e) {
+        console.log("open message", e);
+        // alertSocket.send(locAddress);
+      }
+      alertSocket.onerror = function(e) {
+        console.log("message error", e);
+      }
+
+      alertSocket.onclose= function(e) {
+        console.log("close message", e);
+      }    
+  });
+  
+''
+''
+''
+
+  const getUA = () => {
+      let device = "Unknown";
+      const ua = {
+          "Generic Linux": /Linux/i,
+          "Android": /Android/i,
+          "BlackBerry": /BlackBerry/i,
+          "Bluebird": /EF500/i,
+          "Chrome OS": /CrOS/i,
+          "Datalogic": /DL-AXIS/i,
+          "Honeywell": /CT50/i,
+          "iPad": /iPad/i,
+          "iPhone": /iPhone/i,
+          "iPod": /iPod/i,
+          "macOS": /Macintosh/i,
+          "Windows": /IEMobile|Windows/i,
+          "Zebra": /TC70|TC55/i,
+      }
+      Object.keys(ua).map(v => navigator.userAgent.match(ua[v]) && (device = v));
+      return device;
+  }
+
+''
+
+''
+  // Open up modal
+  function openModal(mdlStr) {
+    document.getElementById(mdlStr).style.display="block";
+  }
+  
+  // close up modal
+    function closeModal(mdlStr) {
+    document.getElementById(mdlStr).style.display="none";
+  }  
+
+    // Open up on page load //
+    document.addEventListener('DOMContentLoaded', function() {        
+        openModal('loginModal');
+    }, false);    
+
+  // Modal Image Gallery
+  function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+    var captionText = document.getElementById("caption");
+    captionText.innerHTML = element.alt;
+  }
+
+  // Open up login model
+  $(document).ready(function(){
+    openModal('loginModal');
+    });
+
+  ''
+
+</script>
+
+</body>
+</html>
+-------------------------------------------------------------------------------

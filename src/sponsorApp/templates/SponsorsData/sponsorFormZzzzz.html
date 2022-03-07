@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="gp-container gp-transparent">
+	<!-- <h2>W3.CSS Modal</h2>
+    <button onclick="document.getElementById('sponsorModal').style.display='block'" class="gp-button gp-black">Open Modal</button> -->
+  <div id="sponsorModal" class="gp-modal gp-padding-64" style="z-index: auto;">
+    <!-- onclick="this.style.display='none'" -->
+		<div class="gp-modal-content gp-card-4 gp-animate-opacity gp-dark-gray" style="min-width:300px">
+  		  <header class="gp-container hdbg gp-center gp-boarder-bottom gp-padding gp-round-large">
+          <h1 class="ga-text-black">            
+            <img src="{% static 'img\icons\Master\svg\Sponsor.svg' %}" alt="($)" style="width:60px">
+            &nbsp;<span>Sponsor</span>
+          </h1>
+        </header>
+        
+        <form method="POST" action="" class="gp-container gp-light-grey gp-text-blue gp-center gp-round-large"> {% csrf_token %}
+          {% for field in frmObj %}
+          {{ field.errors }}
+          <div class="gp-row gp-section">
+            <!-- <i class="gp-xxlarge fa fa-user"></i> -->
+            <div class="gp-col gp-left-align l3 m3 s5">{{ field.label_tag }}</div>
+              <div class="gp-rest">
+                {% if field.label_tag == "Sponsorship Date" %}                  
+                  {{ field|attr:"type:date" }}
+                {% else %}
+                  {{ field }}
+                {% endif %}
+              </div>            
+            </div>        
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+          {% endfor %}
+        <Button type="submit" value="submit" class="gp-hide" id="frmButton">Update</Button>
+        </form>
+
+        <footer class="gp-container gp-center gp-border-top gp-padding-16 gp-round-large ftbg">
+          <button class="gp-button gp-section gp-blue gp-ripple"
+           onclick="document.getElementById('frmButton').click();"> Update </button>
+          <button onclick="closeModal('sponsorModal');window.location.replace('/sponsordata/')" type="button" class="gp-button gp-red">Close</button>
+        </footer>
+        
+      </div>
+    </div>
+</div>
+
+<script>
+    // Open up on page load //
+    document.addEventListener('DOMContentLoaded', function() {        
+        openModal('sponsorModal');
+        updateEntereBy();
+    }, false);    
+  
+  function updateEntereBy() {
+    var enteredBy = document.getElementById("id_EnteredBy");
+        /* enteredBy.value = '{{ user.first_name }} {{ user.last_name }}'; */
+        enteredBy.readOnly = true;
+  }
+
+    // Modal Image Gallery
+	function onClick(element) {
+	  document.getElementById("img01").src = element.src;
+	  document.getElementById("modal01").style.display = "block";
+	  var captionText = document.getElementById("caption");
+	  captionText.innerHTML = element.alt;
+	}
+	// Open up login model
+	$(document).ready(function(){
+        alert('Clicked!')
+		document.getElementById("sponsorModal").style.display="block";        
+    });
+
+	</script>
+{% endblock content %}
+{% block footer %}{% endblock footer %}

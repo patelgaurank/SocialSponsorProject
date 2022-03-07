@@ -1,0 +1,54 @@
+{% load static %}
+<div class="gp-display-container navbarcontainer">
+  <div class="gp-top navbarposition">
+    <div class="gp-bar gp-white gp-card bsNB navbar" id="bsNB">
+      {% if user.is_authenticated %}
+      <a href="javascript:void(0)" id="menu" class="gp-bar-item gp-button gp-wide gp-hide-small bsNBB navbarmenu" onclick="bigbar_open()"><i class="fa fa-bars"></i>&nbsp;<span>MENU</span></a>
+      {% endif %}
+      <div class="gp-display-middle"><h4 class="gp-bar-item gp-text-deep-purple navbartitle" style="font-size: min(2vw, 50px);"><strong id="barTitle">Satsang</strong></h4></div>
+      <div class="gp-right gp-hide-small">
+        {% if user.is_authenticated %}
+          <div class="gp-text-black gp-bar-item gp-button bsNBB navbaruser" id="userName"><span>{{ user.first_name }} {{ user.last_name }}</span></div>
+        {% endif %}
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="gp-text-red gp-bar-item gp-button bsNBB navbarlogout" id="lgBtn"><i class="glyphicon glyphicon-log-in"></i>&nbsp;<span> Log-Out</span></a>
+        {% else %}
+          <a href="{% url 'login' %}" class="gp-text-red gp-bar-item gp-button bsNBB navbarlogin" id="lgBtn"><i class="glyphicon glyphicon-log-in"></i> Log-In</a>
+        {% endif %}
+      </div>
+      <a href="javascript:void(0)" class="gp-bar-item gp-button gp-right gp-hide-large gp-hide-medium bsNBB navbaricon" id="sideBarOpen" onclick="bar_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+  {% if user.is_authenticated %}
+  <nav class="gp-sidebar gp-bar-block gp-card gp-animate-left gp-transparent bsSB" style="display:none;margin-top: 55px;width:200px" id="myBigSidebar">
+    <button class="gp-red gp-bar-item gp-button gp-large bsSBB" style="margin-bottom: 5px" onclick="bigbar_close()">Close &times;</button>
+    <a href="/sponsor/dashboard" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Dashboard</span></a>
+    <a href="/sponsor/sponsorform" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Sponsor Form</span></a>
+    <a href="/sponsor/sponsordata" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Sponsor Data</span></a>
+    <a href="/ims/imsdata" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>IMS Data</span></a>
+    <a href="/sponsor/display" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Display</span></a>
+    <a href="/sponsor/announcer" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Announcer</span></a>
+    <a href="/sponsor/purposecode" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Purpose Code</span></a>
+    <a href="/sponsor/team" class="gp-bar-item gp-button gp-card-4 gp-round-large gp-boarder-bottom gp-dark-gray bsSBB"><span>Team</span></a>
+  </nav>
+  {% endif %}
+  <nav class="gp-sidebar gp-bar-block gp-black gp-card gp-animate-left gp-hide-medium gp-hide-large ssSB" style="display:none;" id="ssSB">
+    <a href="javascript:void(0)" onclick="bar_close()" class="gp-bar-item gp-button gp-large gp-padding-16 ssSBB">Close ×</a>
+    {% if user.is_authenticated %}
+      <a href="/sponsor/dashboard" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Dashboard</span></a>
+      <a href="/sponsor/sponsorform" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Sponsor Form</span></a>
+      <a href="/sponsor/sponsordata" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Sponsor Data</span></a>
+      <a href="/ims/imsdata" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>IMS Data</span></a>
+      <a href="/sponsor/display" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Display</span></a>
+      <a href="/sponsor/announcer" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Announcer</span></a>
+      <a href="/sponsor/purposecode" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Purpose Code</span></a>
+      <a href="/sponsor/team" onclick="bar_close()" class="gp-bar-item gp-button ssSBB"><span>Team</span></a>
+      <a class="gp-text-white gp-bar-item gp-button gp-wide gp-display-bottomleft ssSBB" id="userName"><span>{{ user.first_name }} {{ user.last_name }}</span></a>
+      <a href="{% url 'logout' %}" onclick="bar_close()" class="gp-text-red gp-bar-item gp-button glyphicon glyphicon-log-in ssSBB" id="lgBtn"> Log-Out</a>
+    {% else %}
+      <a href="{% url 'login' %}" onclick="bar_close()" class="gp-text-red gp-bar-item gp-button glyphicon glyphicon-log-in ssSBB" id="lgBtn"> Log-In</a>
+    {% endif %}
+  </nav>
+</div>

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titleName %}Login Page.{% endblock %}
+{% block content %}
+<div class="gp-container">
+	<div id="loginModal" class="gp-modal gp-padding-64">
+		<div class="gp-modal-content gp-card-4 gp-animate-zoom myForm" style="min-width:300px;max-width:600px">
+		  <header class="gp-display-container gp-center gp-padding gp-boarder-bottom hdbg">
+			<img src="{% static 'img\icons\Master\svg\UserLogin.svg' %}" alt="Avatar" style="width:min(15vw, 100px)">
+		  </header>
+		  <form method="POST" class="gp-container gp-center gp-text-black gp-white" id="myFormIn"> {% csrf_token %}
+			<div class="gp-section">
+				<div class="gp-row gp-container">
+					<div class="gp-col gp-center gp-padding">
+					  <div class="gp-row gp-container gp-padding">
+						<label class="gp-padding">{{ form.username.label_tag }}</label>
+						<div class="gp-padding">{{ form.username }}</div>
+						<div>{{ form.username.errors }}</div>
+					  </div>
+					  <div class="gp-row gp-container gp-padding">
+						<label class=" gp-padding">{{ form.password.label_tag }}</label>
+						<div class=" gp-padding">{{ form.password }}</div>
+						<div>{{ form.password.errors }}</div>
+					  </div>
+					  <div class="gp-row gp-container gp-padding">
+						<button type="submit" value="login" class="gp-button gp-block gp-green gp-section gp-padding" id="btnLogin">Login</button>
+						<input type="hidden" name="next" value="{{ next }}" />
+					  </div>
+					  <div class="gp-row gp-container gp-padding">
+						<label class="gp-padding">Remember Me</label>
+						<input class="gp-check" style="margin: 0; top: 0;" type="checkbox" checked="checked" />
+					  </div>
+					</div>
+				  </div>
+
+				<!-- <p class="gp-left"><h4>{{ form.username.label_tag }}</h4></p>
+				<b style="width:100vw;">{{ form.username }}</b>
+				<p class="gp-left"><h4>{{ form.password.label_tag }}</h4></p>
+				<b style="width:100vw;">{{ form.password }}</b>
+				<button type="submit" value="login" class="gp-button gp-block gp-green gp-section gp-padding" id="btnLogin">Login</button>
+				<input type="hidden" name="next" value="{{ next }}" />
+			  	<input class="gp-check gp-margin-top" type="checkbox" checked="checked">Remember me</input> -->
+			</div>
+		  </form>
+		  <footer class="gp-container gp-border-top gp-padding-16 ftbg">
+			<button onclick="location.href='{% url 'login' %}'" type="button" class="gp-button gp-red">Cancel</button>
+			<span class="gp-right gp-padding">Forgot <a href="{% url 'password_reset' %}">password?</a></span>
+		  </footer>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+<script>
+'{% block script %}'
+	// Open up modal
+	function openModal(mdlStr) {
+		document.getElementById(mdlStr).style.display="block";
+	}
+
+	// close up modal
+		function closeModal(mdlStr) {
+		document.getElementById(mdlStr).style.display="none";
+	}
+
+
+    // Open up on page load //
+    document.addEventListener('DOMContentLoaded', function() {
+	    '{% if user.is_authenticated %}'
+			window.location.href = "{% url 'Sponsor_Dashboard.' %}";
+		'{% else %}'
+			console.log('{{ user.is_authenticated }}');
+			openModal('loginModal');
+		'{% endif %}'
+    }, false);
+	// Open up login model
+	$(document).ready(function(){
+	    '{% if user.is_authenticated %}'
+			window.location.href = "{% url 'Sponsor_Dashboard.' %}";
+		'{% else %}'
+			openModal('loginModal');
+		'{% endif %}'
+    });
+'{% endblock script %}'
+</script>

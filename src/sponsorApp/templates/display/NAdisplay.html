@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titleName %}Login Page.{% endblock %}</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'gp.css' %}" type="text/css" />
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-image: url("{% static 'img\PPTBG.jpg' %}");
+  /*background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);*/
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+#smallOverlay {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  background-image: url("{% static 'img\PPTBG.jpg' %}");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  /*background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);*/
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 15%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  bottom: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  bottom: 15px;
+  right: 35px;
+  }
+}
+</style>
+</head>
+<body class="gp-light-grey">
+  {% block content %}
+<!-- Page Container -->
+<<div class="gp-container gp-padding-64 gp-center">
+
+  <!-- The Grid -->
+  <div class="gp-row-padding">
+  
+    <!-- Left Column -->
+    <div class="gp-quarter" style="height:100vh;position:relative;overflow-x:hidden;">
+    
+      <div class="gp-white gp-text-grey gp-card-4">
+        <div class="gp-display-container">
+          <img src="" style="width:100%" alt="Avatar">
+          <div class="gp-display-bottomleft gp-container gp-text-black">
+            <h2>Jane Doe</h2>
+          </div>
+        </div>
+        <div class="gp-container">
+          <p><i class="fa fa-briefcase fa-fw gp-margin-right gp-large gp-text-teal"></i>Designer</p>
+          <p><i class="fa fa-home fa-fw gp-margin-right gp-large gp-text-teal"></i>London, UK</p>
+          <p><i class="fa fa-envelope fa-fw gp-margin-right gp-large gp-text-teal"></i>ex@mail.com</p>
+          <p><i class="fa fa-phone fa-fw gp-margin-right gp-large gp-text-teal"></i>1224435534</p>
+          <hr>
+
+          <p class="gp-large"><b><i class="fa fa-asterisk fa-fw gp-margin-right gp-text-teal"></i>Skills</b></p>
+          <p>Adobe Photoshop</p>
+          <div class="gp-light-grey gp-round-xlarge gp-small">
+            <div class="gp-container gp-center gp-round-xlarge gp-teal" style="width:90%">90%</div>
+          </div>
+          <p>Photography</p>
+          <div class="gp-light-grey gp-round-xlarge gp-small">
+            <div class="gp-container gp-center gp-round-xlarge gp-teal" style="width:80%">
+              <div class="gp-center gp-text-white">80%</div>
+            </div>
+          </div>
+          <p>Illustrator</p>
+          <div class="gp-light-grey gp-round-xlarge gp-small">
+            <div class="gp-container gp-center gp-round-xlarge gp-teal" style="width:75%">75%</div>
+          </div>
+          <p>Media</p>
+          <div class="gp-light-grey gp-round-xlarge gp-small">
+            <div class="gp-container gp-center gp-round-xlarge gp-teal" style="width:50%">50%</div>
+          </div>
+          <br>
+
+          <p class="gp-large gp-text-theme"><b><i class="fa fa-globe fa-fw gp-margin-right gp-text-teal"></i>Languages</b></p>
+          <p>English</p>
+          <div class="gp-light-grey gp-round-xlarge">
+            <div class="gp-round-xlarge gp-teal" style="height:24px;width:100%"></div>
+          </div>
+          <p>Spanish</p>
+          <div class="gp-light-grey gp-round-xlarge">
+            <div class="gp-round-xlarge gp-teal" style="height:24px;width:55%"></div>
+          </div>
+          <p>German</p>
+          <div class="gp-light-grey gp-round-xlarge">
+            <div class="gp-round-xlarge gp-teal" style="height:24px;width:25%"></div>
+          </div>
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="gp-rest" style="height:95vh;position:relative;overflow-x:hidden;">
+  <div class="gp-container gp-card gp-white">
+  <div id="myNav" class="overlay gp-hide">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content" style="padding:0 100px 0 100px">
+  <table class="gp-table-all gp-xxlarge">
+    <tr class="gp-transparent gp-text-blue">
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Points</th>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Adam</td>
+      <td>Johnson</td>
+      <td>67</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Adam</td>
+      <td>Johnson</td>
+      <td>67</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr class="gp-transparent">
+      <td>Adam</td>
+      <td>Johnson</td>
+      <td>67</td>
+    </tr>
+  </table>
+  </div>
+  </div>
+  <div class="gp-display-container" id="smallOverlay" style="height:100vh">
+  <!--  style="background-image:url('\Green.jpg');width:75vw;height:100%;overflow:hidden;postion:auto;"> -->
+  <!-- <img src="C:\Users\kqu8\Desktop\Work\Python_Practice\DjangoPractice\SlideShow\Green.jpg" style="width:100%;height:100%"></img> -->
+  <div class="gp-display-middle gp-text-white">This is in the middle</div>
+  <div style="padding:130px 50px 0 50px">
+  <table class="gp-table-all gp-xlarge">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Points</th>
+    </tr>
+    <tr>
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    <tr>
+    <tr>
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <td>Adam</td>
+      <td>Johnson</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <td>Adam</td>
+      <td>Johnson</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <td>Adam</td>
+      <td>Johnson</td>
+      <td>67</td>
+    </tr>
+  </table>
+  </div>
+  <div class="gp-display-topright gp-text-white gp-margin-right gp-margin-top">
+  <span class="fas fa-expand" style="font-size:30px;cursor:pointer;" onclick="openNav()"></span>
+  </div>
+  </div>
+  </div>
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+<script>
+var elem = document.documentElement;
+var navElem = document.getElementById("myNav");
+
+function showBgWithTable() {
+  var name, arr;
+  name = "gp-show";
+  arr = navElem.className.split(" ");
+  if (arr.indexOf(name) == -1) {
+    navElem.className += " " + name;
+  } else navElem.className = navElem.className.replace(/\bgp-show\b/g,"")
+}
+
+function openNav() {
+  showBgWithTable()
+  navElem.style.width = "100%";
+  if (elem.requestFullscreen) {    
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+function closeNav() {
+  showBgWithTable()
+  navElem.style.width = "0%";
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+}
+
+document.onkeydown = function(evt) {
+  evt = evt || window.event;
+  if (evt.keyCode == 27) {
+  showBgWithTable()
+  navElem.style.width = "0%";
+  }
+}
+</script>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titleName %}Team{% endblock %}
+{% block content %}
+<!-- Team Container -->
+<div class="gp-container gp-center" id="team">
+  <header class="hdbg gp-center gp-boarder-bottom">
+    <h1>
+        <span class="ga-text-black txtSize">SPONSOR/DATABASE TEAM</span>
+    </h1>
+  </header>
+  <div class="gp-container">
+    {% autoescape off %}{{ objTeamLstTag }}{% endautoescape %}
+  </div>
+</div>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+<script>
+'{% block script %}'
+'{% endblock script %}'
+</script>
